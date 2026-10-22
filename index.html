@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS VPC Peering Lab</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172337}
+header{background:#172337;color:white;padding:28px 7%}
+header p{color:#c6d2e1;margin-bottom:0}
+main{max-width:1050px;margin:30px auto;padding:0 20px}
+h2{font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:white;padding:22px;border:1px solid #dfe6ef;border-radius:12px}
+.muted{color:#617086;font-size:14px}
+.tag{display:inline-block;background:#e3f8ec;color:#137341;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.network{display:flex;align-items:center;justify-content:center;gap:20px;margin:24px 0;flex-wrap:wrap}
+.vpc{background:white;border:2px solid #e6a23c;border-radius:12px;padding:22px;text-align:center;min-width:210px}
+.connection{font-weight:bold;color:#147d50;text-align:center}
+code{overflow-wrap:anywhere}
+footer{text-align:center;padding:30px;color:#617086;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <p>AWS CLOUD PROJECT · NETWORKING</p>
+  <h1>VPC Peering Lab</h1>
+  <p>Private communication between two Amazon Virtual Private Clouds</p>
+</header>
+<main>
+  <div class="grid">
+    <section class="card">
+      <span class="tag">VPC A</span>
+      <h2>EWB-VPC-A</h2>
+      <p class="muted">CIDR block</p>
+      <strong>10.10.0.0/16</strong>
+      <p class="muted">EC2 private IP: 10.10.1.203</p>
+    </section>
+    <section class="card">
+      <span class="tag">VPC B</span>
+      <h2>EWB-VPC-B</h2>
+      <p class="muted">CIDR block</p>
+      <strong>10.20.0.0/16</strong>
+      <p class="muted">EC2 private IP: 10.20.1.29</p>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:20px">
+    <h2>Network architecture</h2>
+    <div class="network">
+      <div class="vpc"><strong>VPC A</strong><p>10.10.0.0/16</p></div>
+      <div class="connection">↔<br>VPC Peering<br><span class="muted">Private routing</span></div>
+      <div class="vpc"><strong>VPC B</strong><p>10.20.0.0/16</p></div>
+    </div>
+    <p class="muted">Peering connection ID</p>
+    <code>pcx-0c857e64f45cde627</code>
+  </section>
+
+  <section class="card" style="margin-top:20px">
+    <h2>Routing configuration</h2>
+    <p><strong>VPC A → VPC B</strong></p>
+    <code>10.20.0.0/16 → pcx-0c857e64f45cde627</code>
+    <p><strong>VPC B → VPC A</strong></p>
+    <code>10.10.0.0/16 → pcx-0c857e64f45cde627</code>
+  </section>
+
+  <section class="card" style="margin-top:20px">
+    <h2>Connectivity verification</h2>
+    <p>Test command</p>
+    <code>ping -c 4 10.20.1.29</code>
+    <h3 style="color:#137341">4 packets received · 0% packet loss</h3>
+    <p class="muted">Successful test recorded during the lab. This page displays the recorded result; it does not run a new network test.</p>
+  </section>
+</main>
+<footer>AWS VPC Peering Lab · Educational project portfolio</footer>
+</body>
+</html>
